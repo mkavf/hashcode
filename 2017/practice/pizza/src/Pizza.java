@@ -25,11 +25,7 @@ public class Pizza {
                 validMinSlices.add(slice);
             }
         } while (validMinSlices.size() == maxSlicesCount || Objects.isNull(slice));
-
-
-
     }
-
 
     private Slice minSlice(Cell start, int takeUp) {
         List<Cell> cells = new ArrayList<>();
@@ -47,7 +43,7 @@ public class Pizza {
             break;
         }
         if (start.getRow() < rows - 1) {
-            return minSlice(start.getDown(), takeUp + 1);
+            return minSlice(getDown(start), takeUp + 1);
         }
         return null;
     }
@@ -61,9 +57,7 @@ public class Pizza {
     }
 
     private boolean canAdd(List<Cell> cells) {
-        if (cells.size() > maxSliceSize) {
-            return false;
-        }
+        return cells.size() < maxSliceSize;
     }
 
     private boolean isValid(List<Cell> cells) {
@@ -76,6 +70,8 @@ public class Pizza {
         if (df.get(Boolean.FALSE).size() < minIngredians) {
             return false;
         }
+
+        return true;
     }
 
     private void addUpper(List<Cell> cells, Cell cell, int takeUp) {

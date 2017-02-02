@@ -3,35 +3,36 @@ package model;
 
 public class Cell {
 
-    private CellType type;
+    private boolean isTomato;
 
     private boolean isIncluded;
 
-    public Cell(CellType type) {
-        this.type = type;
-    }
-
-    public CellType getType() {
-        return type;
-    }
-
-    public void setType(CellType type) {
-        this.type = type;
+    public Cell(boolean isTomato) {
+        this.isTomato = isTomato;
     }
 
     public boolean isIncluded() {
         return isIncluded;
     }
 
-    public void setIsIncluded(boolean isIncluded) {
+    public void setIncluded(boolean isIncluded) {
         this.isIncluded = isIncluded;
     }
 
-    public enum CellType {
-        T, M
+
+    public Cell getRigth(){
+
     }
 
+    public Cell getDown(){
 
+    }
 
+    public boolean isTomato() {
+        return isTomato;
+    }
 
+    public void setTomato(boolean tomato) {
+        isTomato = tomato;
+    }
 }

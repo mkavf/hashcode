@@ -1,11 +1,17 @@
 package model;
 
 
-public class Cell {
+public class Cell implements Comparable<Cell> {
 
     private boolean isTomato;
 
     private boolean isIncluded;
+
+    private Cell right;
+    private Cell down;
+
+    int row;
+    int column;
 
     public Cell(boolean isTomato) {
         this.isTomato = isTomato;
@@ -21,11 +27,11 @@ public class Cell {
 
 
     public Cell getRigth(){
-
+      return right;
     }
 
     public Cell getDown(){
-
+       return down;
     }
 
     public boolean isTomato() {
@@ -34,5 +40,38 @@ public class Cell {
 
     public void setTomato(boolean tomato) {
         isTomato = tomato;
+    }
+
+    public void setIsTomato(boolean isTomato) {
+        this.isTomato = isTomato;
+    }
+
+    public void setIsIncluded(boolean isIncluded) {
+        this.isIncluded = isIncluded;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
+    @Override
+    public int compareTo(Cell o) {
+        int a = this.column - o.getColumn();
+        if (a == 0) {
+            return this.row - o.getRow();
+        }
+        return a;
     }
 }

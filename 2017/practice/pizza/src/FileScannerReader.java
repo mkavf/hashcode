@@ -25,6 +25,8 @@ public class FileScannerReader {
                     String[] items = line.split(" ");
                     result.setMinIngredians(Integer.valueOf(items[2]));
                     result.setMaxSliceSize(Integer.valueOf(items[3]));
+                    result.setRows(Integer.valueOf(items[0]));
+                    result.setCollsAmount(Integer.valueOf(items[1]));
                 } else {
                     line = line.toUpperCase();
 
@@ -32,7 +34,7 @@ public class FileScannerReader {
                     for (int j = 0; j < line.length(); j++) {
                         Cell cell = new Cell(TOMATO == line.charAt(j));
                         cell.setColumn(j);
-                        cell.setRow(i);
+                        cell.setRow(i - 1);
 
                         result.getCellsSet().add(cell);
 

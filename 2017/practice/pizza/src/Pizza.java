@@ -128,4 +128,12 @@ public class Pizza {
     public TreeSet<Cell> getCellsSet() {
         return cellsSet;
     }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
+    public void setCollsAmount(int collsAmount) {
+        this.collsAmount = collsAmount;
+    }
 }

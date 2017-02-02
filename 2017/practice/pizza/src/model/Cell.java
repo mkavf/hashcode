@@ -3,6 +3,9 @@ package model;
 
 public class Cell {
 
+    private int row;
+    private int col;
+
     private boolean isTomato;
 
     private boolean isIncluded;
@@ -20,11 +23,11 @@ public class Cell {
     }
 
 
-    public Cell getRigth(){
+    public Cell getRigth() {
 
     }
 
-    public Cell getDown(){
+    public Cell getDown() {
 
     }
 
@@ -34,5 +37,18 @@ public class Cell {
 
     public void setTomato(boolean tomato) {
         isTomato = tomato;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    @Override
+    public String toString() {
+        return row + " " + col;
     }
 }

@@ -108,4 +108,24 @@ public class Pizza {
                 return a;
 
             };
+
+    public int getMinIngredians() {
+        return minIngredians;
+    }
+
+    public void setMinIngredians(int minIngredians) {
+        this.minIngredians = minIngredians;
+    }
+
+    public int getMaxSliceSize() {
+        return maxSliceSize;
+    }
+
+    public void setMaxSliceSize(int maxSliceSize) {
+        this.maxSliceSize = maxSliceSize;
+    }
+
+    public TreeSet<Cell> getCellsSet() {
+        return cellsSet;
+    }
 }

@@ -1,6 +1,8 @@
 package model;
 
 
+import java.util.Objects;
+
 public class Cell implements Comparable<Cell> {
 
     private int row;
@@ -11,7 +13,11 @@ public class Cell implements Comparable<Cell> {
     private boolean isIncluded;
 
     private Cell right;
+    private Cell left;
+
     private Cell down;
+    private Cell up;
+
 
     public Cell(boolean isTomato) {
         this.isTomato = isTomato;
@@ -73,5 +79,46 @@ public class Cell implements Comparable<Cell> {
             return this.row - o.getRow();
         }
         return a;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cell cell = (Cell) o;
+        return row == cell.row &&
+                column == cell.column;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, column);
+    }
+
+    public Cell getLeft() {
+        return left;
+    }
+
+    public void setLeft(Cell left) {
+        this.left = left;
+    }
+
+    public Cell getUp() {
+        return up;
+    }
+
+    public void setUp(Cell up) {
+        this.up = up;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Cell{" +
+                "isTomato=" + isTomato +
+                ", isIncluded=" + isIncluded +
+                ", row=" + row +
+                ", column=" + column +
+                '}';
     }
 }

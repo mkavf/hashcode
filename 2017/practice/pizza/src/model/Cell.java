@@ -34,6 +34,14 @@ public class Cell implements Comparable<Cell> {
        return down;
     }
 
+    public void setRight(Cell right) {
+        this.right = right;
+    }
+
+    public void setDown(Cell down) {
+        this.down = down;
+    }
+
     public boolean isTomato() {
         return isTomato;
     }

@@ -12,7 +12,7 @@ public class FileScannerReader {
 
 
     public Pizza read() throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader("/home/rhrytsiv/IdeaProjects/hashcode/2017/practice/pizza/file.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("D:\\Projects\\hashcode\\2017\\practice\\pizza\\file.txt"))) {
             String line = br.readLine();
             int i = 0;
 

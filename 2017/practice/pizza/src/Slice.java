@@ -1,11 +1,20 @@
 import model.Cell;
 
+import java.util.List;
+
 public class Slice {
-    public boolean isValid(){
-        return true;
+
+    private List<Cell> cells;
+
+    private void add(Cell cell){
+        cells.add(cell);
     }
 
-    public void add(Cell cell){
+    public List<Cell> getCells() {
+        return cells;
+    }
 
+    public void setCells(List<Cell> cells) {
+        this.cells = cells;
     }
 }

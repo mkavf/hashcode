@@ -55,6 +55,18 @@ public class Cell implements Comparable<Cell> {
         return row;
     }
 
+    public void setCol(int col) {
+        this.col = col;
+    }
+
+    public void setRight(Cell right) {
+        this.right = right;
+    }
+
+    public void setDown(Cell down) {
+        this.down = down;
+    }
+
     @Override
     public String toString() {
         return row + " " + col;
@@ -109,13 +121,5 @@ public class Cell implements Comparable<Cell> {
 
     public void setUp(Cell up) {
         this.up = up;
-    }
-
-    public void setDown(Cell down) {
-        this.down = down;
-    }
-
-    public void setRight(Cell right) {
-        this.right = right;
     }
 }

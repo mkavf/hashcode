@@ -1,6 +1,7 @@
 import model.Cell;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
@@ -55,4 +56,15 @@ public class Pizza {
 
         addUpper(cells, up, takeUp - 1);
     }
+
+    public Comparator<Cell> reverseCellComparator
+            = (cell1, cell2) -> {
+
+                int a = cell1.getRow() - cell2.getRow();
+                if (a == 0) {
+                    return cell1.getColumn() - cell2.getColumn();
+                }
+                return a;
+
+            };
 }

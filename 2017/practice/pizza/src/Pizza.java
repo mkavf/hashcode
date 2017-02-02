@@ -1,6 +1,11 @@
 import model.Cell;
 
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Pizza {
@@ -92,4 +97,15 @@ public class Pizza {
     private Cell getDown(Cell cell) {
         return cellsArr[cell.getRow() + 1][cell.getCol()];
     }
+
+    public Comparator<Cell> reverseCellComparator
+            = (cell1, cell2) -> {
+
+                int a = cell1.getRow() - cell2.getRow();
+                if (a == 0) {
+                    return cell1.getColumn() - cell2.getColumn();
+                }
+                return a;
+
+            };
 }

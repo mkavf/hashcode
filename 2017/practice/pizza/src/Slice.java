@@ -1,6 +1,8 @@
 import model.Cell;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Slice {
 
@@ -16,5 +18,16 @@ public class Slice {
 
     public void setCells(List<Cell> cells) {
         this.cells = cells;
+    }
+
+    private boolean isValidSlice(int maxSliceSize, int minElements) {
+        if(cells.size() > maxSliceSize){
+            return false;
+        }
+
+        Map<Boolean, List<Cell>> df = cells.stream().collect(Collectors.groupingBy(Cell::isTomato));
+
+        return df.values().stream().map(l -> l.size() > minElements).filter(t -> t).findAny().orElse(false);
+
     }
 }

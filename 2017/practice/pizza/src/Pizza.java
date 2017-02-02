@@ -17,7 +17,7 @@ public class Pizza {
     private int collsAmount;
 
     private TreeSet<Cell> cellsSet = new TreeSet<>();
-    private Cell[][] cellsArr;
+    private Cell[][] cellsArr = null;
 
     private List<Slice> validMinSlices = new ArrayList<>();
     private double maxSlicesCount;
@@ -133,7 +133,27 @@ public class Pizza {
         this.rows = rows;
     }
 
+    public int getRows() {
+        return rows;
+    }
+
+    public int getCollsAmount() {
+        return collsAmount;
+    }
+
+    public Cell[][] getCellsArr() {
+        return cellsArr;
+    }
+
     public void setCollsAmount(int collsAmount) {
         this.collsAmount = collsAmount;
+    }
+
+    public void setCellsArr(Cell[][] cellsArr) {
+        this.cellsArr = cellsArr;
+    }
+
+    public void setMaxSlicesCount(double maxSlicesCount) {
+        this.maxSlicesCount = maxSlicesCount;
     }
 }

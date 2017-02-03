@@ -25,6 +25,9 @@ public class Solution {
         }
         while (occupiedCells[nextCell] != 0){
             nextCell++;
+            if (nextCell >= occupiedCells.length){
+                return -1;
+            }
         }
         return nextCell++;
     }
@@ -34,5 +37,20 @@ public class Solution {
         for (Cell cell: slice.getCells()){
             occupiedCells[cell.getIndex()]=1;
         }
+    }
+
+    public List<Slice> getSlices() {
+        return slices;
+    }
+
+    public int slicesArea() {
+        return slices.stream()
+                .map(s -> s.getCells().size())
+                .reduce(Integer::sum)
+                .orElse(0);
+    }
+
+    public boolean isAvailableCell(int index) {
+        return occupiedCells[index] == 0;
     }
 }

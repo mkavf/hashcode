@@ -11,8 +11,8 @@ public class FileScannerReader {
     private final static char TOMATO = 'T';
 
 
-    public Pizza read() throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader("/home/rhrytsiv/IdeaProjects/hashcode/2017/practice/pizza/file.txt"))) {
+    public Pizza read(String filePath) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = br.readLine();
             int i = 0;
 

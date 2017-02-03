@@ -1,4 +1,5 @@
 import model.Cell;
+import sun.reflect.generics.tree.Tree;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -14,68 +15,82 @@ public class PizzaBruteForceSolver {
     private TreeSet<Cell> cellsSet = new TreeSet<>();
 
 
-    private List<Slice> bestSolution = new ArrayList<>();
+    private List<Slice> slices = new ArrayList<>();
+    private Solution bestSolution = null;
 
     private Cell[][] cellsArr = null;
 
-    private List<Slice> validMinSlices = new ArrayList<>();
     private int maxSlicesCount;
     private int bestSlicesCount;
 
-    public List<Slice> getSolution(Pizza pizza) {
+    private TreeSet<Solution> nextSolutions = new TreeSet<>((s1, s2) -> {
+        return Integer.compare(s2.slicesArea(), s1.slicesArea());
+    });
+
+    public Solution getSolution(Pizza pizza) {
         init(pizza);
-        Cell start = cellsArr[0][0];
-        List<Slice> slices = getNextSolution(start);
-        return evaluateBestSolution(slices);
-    }
 
-    private List<Slice> evaluateBestSolution(List<Slice> slices) {
-        return null;
-    }
-
-    private List<Solution> getNextSolution(Solution solution, Cell start) {
-        List<Solution> solutions = new ArrayList<>();
-        for (Slice slice : getPossibleSlicesStartingAt(start)) {
-            Solution newSolution = solution.clone();
-            solutions.add(newSolution);
-            newSolution.addSlice(slice);
-
-            int nextAvailableCellIndex = solution.getNextAvailableCell();
-            if (nextAvailableCellIndex<0){
-                return ;
+        Solution solution = new Solution(new byte[rows * colls], new ArrayList<>(maxSlicesCount));
+        do {
+            solution = prepareSolution(solution);
+            if (isPerfectSolution(solution)) {
+                return solution;
+            }
+            if (isBetterThanBest(solution)) {
+                bestSolution = solution;
             }
 
-            Cell nextAvailable = cellsArr[nextAvailableCellIndex/colls][nextAvailableCellIndex%colls];
-            if (nextAvailable != null) {
-                slice.setNextSlices(getNextSolution(newSolution, nextAvailable));
+            solution = nextSolutions.pollFirst();
+        } while (Objects.nonNull(solution));
+        return bestSolution;
+    }
+
+    private boolean isBetterThanBest(Solution solution) {
+        return Objects.isNull(bestSolution) || solution.slicesArea() > bestSolution.slicesArea();
+    }
+
+    private boolean isPerfectSolution(Solution solution) {
+        return solution.getSlices().size() == bestSlicesCount && solution.slicesArea() == rows * colls;
+    }
+
+    private Solution prepareSolution(Solution solution) {
+
+        int nextAvailableCellIndex;
+        while ((nextAvailableCellIndex = solution.getNextAvailableCell()) >= 0) {
+            Cell nextAvailable = cellsArr[nextAvailableCellIndex / colls][nextAvailableCellIndex % colls];
+            LinkedList<Slice> slices = getPossibleSlicesStartingAt(solution, nextAvailable);
+            Slice firstSlice = slices.pollFirst();
+            while (!slices.isEmpty()) {
+                Solution newSol = solution.clone();
+                newSol.addSlice(slices.pollFirst());
+                nextSolutions.add(newSol);
+            }
+            if (firstSlice != null) {
+                solution.addSlice(firstSlice);
             }
         }
-        return solutions;
+        return solution;
     }
 
-    private Cell getNextAvailableCellAfter(Solution solution) {
-
-    }
-
-    private List<Slice> getPossibleSlicesStartingAt(Cell start) {
-        int maxSliceArea = maxSliceSize;
-        List<Slice> slices = new ArrayList<>();
-        for (int width = 1; width <= maxSliceArea; width++) {
-            int height = maxSliceArea / width;
-            if (isValidBounds(start, width, height) && hasValidIngredients(start, width, height)) {
-                slices.add(createSliceAt(start, width, height));
+    private LinkedList<Slice> getPossibleSlicesStartingAt(Solution solution, Cell start) {
+        LinkedList<Slice> slices = new LinkedList<>();
+        for (int width = maxSliceSize; width > 0; width--) {
+            for (int height = maxSliceSize; height > 0; height--) {
+                if (isValidBounds(solution, start, width, height) && hasValidIngredients(start, width, height)) {
+                    slices.add(createSliceAt(start, width, height));
+                }
             }
         }
         return slices;
     }
 
-    private boolean isValidBounds(Cell start, int width, int height) {
-        if (start.getCol() + width > colls || start.getRow() + height > rows) {
+    private boolean isValidBounds(Solution solution, Cell start, int width, int height) {
+        if (width * height > maxSliceSize || start.getCol() + width > colls || start.getRow() + height > rows) {
             return false;
         }
         for (int i = start.getCol(); i < start.getCol() + width; i++) {
             for (int j = start.getRow(); j < start.getRow() + height; j++) {
-                if (cellsArr[i][j].isIncluded()) {
+                if (!solution.isAvailableCell(cellsArr[j][i].getIndex())) {
                     return false;
                 }
             }
@@ -89,7 +104,7 @@ public class PizzaBruteForceSolver {
         int countM = 0;
         for (int i = start.getCol(); i < start.getCol() + width; i++) {
             for (int j = start.getRow(); j < start.getRow() + height; j++) {
-                if (cellsArr[i][j].isTomato()) {
+                if (cellsArr[j][i].isTomato()) {
                     countT++;
                 } else {
                     countM++;
@@ -106,7 +121,7 @@ public class PizzaBruteForceSolver {
         List<Cell> sliceCells = new ArrayList<>();
         for (int i = start.getCol(); i < start.getCol() + width; i++) {
             for (int j = start.getRow(); j < start.getRow() + height; j++) {
-                sliceCells.add(cellsArr[i][j]);
+                sliceCells.add(cellsArr[j][i]);
             }
         }
         return new Slice(sliceCells);

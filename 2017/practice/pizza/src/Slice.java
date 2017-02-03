@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.TreeSet;
 
-public class Slice {
+public class Slice implements Comparable<Slice>{
 
     private final TreeSet<Cell> cells;
 
@@ -30,5 +30,10 @@ public class Slice {
 
     public TreeSet<Cell> getCells() {
         return cells;
+    }
+
+    @Override
+    public int compareTo(Slice o) {
+        return Integer.compare(o.getCells().size(), this.getCells().size());
     }
 }

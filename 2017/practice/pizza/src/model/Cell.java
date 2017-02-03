@@ -8,13 +8,14 @@ public class Cell implements Comparable<Cell> {
     private int row;
     private int col;
 
+    private int index;
+
     private boolean isTomato;
 
     private boolean isIncluded;
-
     private Cell right;
-    private Cell left;
 
+    private Cell left;
     private Cell down;
     private Cell up;
 
@@ -121,5 +122,13 @@ public class Cell implements Comparable<Cell> {
 
     public void setUp(Cell up) {
         this.up = up;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

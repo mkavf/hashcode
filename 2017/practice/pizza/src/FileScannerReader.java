@@ -28,7 +28,7 @@ public class FileScannerReader {
                     result.setRows(Integer.valueOf(items[0]));
                     result.setCollsAmount(Integer.valueOf(items[1]));
 
-                    result.setCellsArr(new Cell[result.getRows()][result.getCollsAmount()]);
+                    result.setCellsArr(new Cell[result.getRows()][result.getColls()]);
                 } else {
                     line = line.toUpperCase();
 
@@ -46,7 +46,7 @@ public class FileScannerReader {
 
                         cell.setColumn(j);
                         cell.setRow(rowIndex);
-
+                        cell.setIndex(rowIndex*line.length()+j);
                         result.getCellsSet().add(cell);
 
                         if (rowIndex != 0) {
@@ -67,7 +67,7 @@ public class FileScannerReader {
                 i++;
             }
 
-            int lessCount = Math.min(countTomato, result.getCollsAmount() * result.getRows() - countTomato);
+            int lessCount = Math.min(countTomato, result.getColls() * result.getRows() - countTomato);
 
             result.setMaxSlicesCount(lessCount / result.getMinIngredians());
 

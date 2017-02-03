@@ -137,7 +137,7 @@ public class Pizza {
         return rows;
     }
 
-    public int getCollsAmount() {
+    public int getColls() {
         return collsAmount;
     }
 

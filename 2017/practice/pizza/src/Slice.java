@@ -1,6 +1,7 @@
 import model.Cell;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.TreeSet;
 
 public class Slice {
@@ -19,7 +20,15 @@ public class Slice {
         this.cells.addAll(cells);
     }
 
-    public String getCoordinates(){
+    public String getCoordinatesString(){
         return cells.first().toString()+" "+cells.last().toString();
+    }
+
+    public void setNextSlices(List<Slice> nextSolution) {
+
+    }
+
+    public TreeSet<Cell> getCells() {
+        return cells;
     }
 }

@@ -35,7 +35,7 @@ public class FileScannerReader {
                     int rowIndex = i - 1;
 
                     Cell [] thisLine = new Cell[line.length()];
-                    for (int j = 0; j < line.length(); j++) {
+                    for (int j = 0; j < result.getColls(); j++) {
                         Cell cell = new Cell(TOMATO == line.charAt(j));
 
                         result.getCellsArr()[rowIndex][j] = cell;
@@ -46,7 +46,7 @@ public class FileScannerReader {
 
                         cell.setColumn(j);
                         cell.setRow(rowIndex);
-                        cell.setIndex(rowIndex*line.length()+j);
+                        cell.setIndex(rowIndex*result.getColls()+j);
                         result.getCellsSet().add(cell);
 
                         if (rowIndex != 0) {

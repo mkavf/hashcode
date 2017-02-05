@@ -36,4 +36,11 @@ public class Slice implements Comparable<Slice>{
     public int compareTo(Slice o) {
         return Integer.compare(o.getCells().size(), this.getCells().size());
     }
+
+    @Override
+    public String toString() {
+        return "Slice{" +
+                 cells +
+                '}';
+    }
 }

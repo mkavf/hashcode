@@ -22,6 +22,7 @@ public class PizzaBruteForceSolver {
 
     private int maxSlicesCount;
     private int bestSlicesCount;
+    private int smallPeaceEnough;
 
     private TreeSet<Solution> nextSolutions = new TreeSet<>((s1, s2) -> {
         return Integer.compare(s2.slicesArea(), s1.slicesArea());
@@ -30,7 +31,7 @@ public class PizzaBruteForceSolver {
     public Solution getSolution(Pizza pizza) {
         init(pizza);
 
-        Solution solution = new Solution(new byte[rows * colls], new ArrayList<>(maxSlicesCount));
+        Solution solution = new Solution(rows, colls, new byte[rows * colls], new ArrayList<>(maxSlicesCount));
         do {
             solution = prepareSolution(solution);
             if (isPerfectSolution(solution)) {
@@ -60,7 +61,7 @@ public class PizzaBruteForceSolver {
             Cell nextAvailable = cellsArr[nextAvailableCellIndex / colls][nextAvailableCellIndex % colls];
             LinkedList<Slice> slices = getPossibleSlicesStartingAt(solution, nextAvailable);
             Slice firstSlice = slices.pollFirst();
-            while (!slices.isEmpty()) {
+            while (createMoreSolutions(solution) && !slices.isEmpty()) {
                 Solution newSol = solution.clone();
                 newSol.addSlice(slices.pollFirst());
                 nextSolutions.add(newSol);
@@ -72,15 +73,25 @@ public class PizzaBruteForceSolver {
         return solution;
     }
 
+    private boolean createMoreSolutions(Solution solution) {
+        return solution.getFreeCellsCount() < smallPeaceEnough;
+    }
+
     private LinkedList<Slice> getPossibleSlicesStartingAt(Solution solution, Cell start) {
         LinkedList<Slice> slices = new LinkedList<>();
         for (int width = maxSliceSize; width > 0; width--) {
             for (int height = maxSliceSize; height > 0; height--) {
+                if (solution.isReverse()){
+                    int temp = width;
+                    width = height;
+                    height = temp;
+                }
                 if (isValidBounds(solution, start, width, height) && hasValidIngredients(start, width, height)) {
                     slices.add(createSliceAt(start, width, height));
                 }
             }
         }
+        solution.changeReverse();
         return slices;
     }
 
@@ -134,7 +145,7 @@ public class PizzaBruteForceSolver {
         colls = pizza.getColls();
         minIngredians = pizza.getMinIngredians();
         maxSliceSize = pizza.getMaxSliceSize();
-
+        smallPeaceEnough = maxSliceSize*maxSliceSize*4;
 
         Map<Boolean, List<Cell>> groupedIngredients = cellsSet.stream().collect(Collectors.groupingBy(Cell::isTomato));
         Iterator<List<Cell>> iterator = groupedIngredients.values().iterator();

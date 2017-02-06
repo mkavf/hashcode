@@ -8,9 +8,12 @@ public class Main {
         Solution solution = new PizzaBruteForceSolver().getSolution(inputData);
         System.out.println("Slices count: " + solution.getSlices().size());
         System.out.println("Slices area: " + solution.slicesArea());
-        System.out.println("Pizz area: " + inputData.getColls()*inputData.getRows());
-        System.out.println("Slices area: " + solution.getSlices());
-//        new FrameResultsDisplay().display(inputData, solution);
+        int pizzaArea = inputData.getColls() * inputData.getRows();
+        System.out.println("Pizz area: " + pizzaArea);
+        if (pizzaArea < 1000) {
+            System.out.println("Slices area: " + solution.getSlices());
+            new FrameResultsDisplay().display(inputData, solution);
+        }
         System.out.println(inputData);
     }
 }

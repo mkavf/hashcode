@@ -35,7 +35,7 @@ public class FrameResultsDisplay implements ResultsDisplay {
                         : createPanel(tomatoColor, "M");
             }
         }
-        for (int i = rows-1; i >=0; i--) {
+        for (int i = 0; i< rows; i++) {
             for (int j = 0; j < colls; j++) {
                 JPanel panel = panels[i][j];
                 if (panel == null){

@@ -1,10 +1,12 @@
 import model.Cell;
-import sun.reflect.generics.tree.Tree;
+import model.Pizza;
+import model.Slice;
+import model.Solution;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class PizzaBruteForceSolver {
+public class OneWayPizzaBruteForceSolver {
 
     private int minIngredians = 0;
     private int maxSliceSize = 0;

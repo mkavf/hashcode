@@ -1,3 +1,5 @@
+package out;
+
 import model.Cell;
 
 import javax.swing.*;
@@ -16,7 +18,7 @@ public class FrameResultsDisplay implements ResultsDisplay {
 
     @Override
     public void display(Pizza pizza, Solution solution) {
-        JFrame pizzaFrame = new JFrame("Pizza");
+        JFrame pizzaFrame = new JFrame("model.Pizza");
         int rows = solution.getRows();
         int colls = solution.getColls();
         pizzaFrame.setMinimumSize(new Dimension(30 * rows, 30 * colls));

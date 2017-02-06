@@ -1,4 +1,4 @@
-import model.Cell;
+package model;
 
 import java.util.Collection;
 import java.util.List;
@@ -39,7 +39,7 @@ public class Slice implements Comparable<Slice>{
 
     @Override
     public String toString() {
-        return "Slice{" +
+        return "model.Slice{" +
                  cells +
                 '}';
     }

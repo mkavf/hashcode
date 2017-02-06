@@ -1,4 +1,5 @@
 import model.Cell;
+import model.Pizza;
 
 
 import java.io.BufferedReader;

@@ -2,17 +2,19 @@ import model.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class Solution {
 
     private byte[] occupiedCells;
     private List<Slice> slices;
-    private int nextCell = 0;
+    private int nextAvailableCell = 0;
+    private int lastAvailableCell = 0;
     private int freeCellsCount;
     private boolean reverse;
     private int rows;
     private int colls;
+    private int lastReservedRow;
+    private int lastReservedCol;
 
     public Solution(int rows, int colls, byte[] occupiedCells, List<Slice> slices) {
         this.rows = rows;
@@ -20,6 +22,7 @@ public class Solution {
         this.occupiedCells = occupiedCells;
         this.slices = slices;
         freeCellsCount = getFreeCellsCount(occupiedCells);
+        lastAvailableCell = occupiedCells.length-1;
     }
 
     private int getFreeCellsCount(byte[] occupiedCells) {
@@ -38,16 +41,32 @@ public class Solution {
     }
 
     public int getNextAvailableCell(){
-        if (nextCell >= occupiedCells.length){
+        if (reverse){
+            return getLastAvailableCell();
+        }
+        if (nextAvailableCell > lastAvailableCell){
             return -1;
         }
-        while (occupiedCells[nextCell] != 0){
-            nextCell++;
-            if (nextCell >= occupiedCells.length){
+        while (occupiedCells[nextAvailableCell] != 0){
+            nextAvailableCell++;
+            if (nextAvailableCell > lastAvailableCell){
                 return -1;
             }
         }
-        return nextCell++;
+        return nextAvailableCell++;
+    }
+
+    public int getLastAvailableCell() {
+        if (lastAvailableCell < nextAvailableCell){
+            return -1;
+        }
+        while (occupiedCells[lastAvailableCell] != 0){
+            lastAvailableCell--;
+            if (lastAvailableCell < nextAvailableCell){
+                return -1;
+            }
+        }
+        return lastAvailableCell--;
     }
 
     public void addSlice(Slice slice) {
@@ -82,7 +101,7 @@ public class Solution {
     }
 
     public void changeReverse() {
-//        reverse = !reverse;
+        reverse = !reverse;
     }
 
     public int getRows() {

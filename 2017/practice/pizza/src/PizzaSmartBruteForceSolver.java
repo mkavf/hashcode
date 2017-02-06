@@ -1,10 +1,9 @@
 import model.Cell;
-import sun.reflect.generics.tree.Tree;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class PizzaBruteForceSolver {
+public class PizzaSmartBruteForceSolver {
 
     private int minIngredians = 0;
     private int maxSliceSize = 0;
@@ -69,6 +68,7 @@ public class PizzaBruteForceSolver {
             if (firstSlice != null) {
                 solution.addSlice(firstSlice);
             }
+            solution.changeReverse();
         }
         return solution;
     }
@@ -81,13 +81,17 @@ public class PizzaBruteForceSolver {
         LinkedList<Slice> slices = new LinkedList<>();
         for (int width = maxSliceSize; width > 0; width--) {
             for (int height = maxSliceSize; height > 0; height--) {
-                if (solution.isReverse()){
-                    int temp = width;
-                    width = height;
-                    height = temp;
+                Cell tempCell = start;
+                if (solution.isReverse()) {
+                    int startCol = solution.isReverse() ? start.getCol() - width + 1 : start.getCol();
+                    int startRow = solution.isReverse() ? start.getRow() - height + 1 : start.getRow();
+                    if (startCol <0 || startRow<0 ){
+                        continue;
+                    }
+                    tempCell = cellsArr[startRow][startCol];
                 }
-                if (isValidBounds(solution, start, width, height) && hasValidIngredients(start, width, height)) {
-                    slices.add(createSliceAt(start, width, height));
+                if (isValidBounds(solution, tempCell, width, height) && hasValidIngredients(tempCell, width, height)) {
+                    slices.add(createSliceAt(tempCell, width, height));
                 }
             }
         }
@@ -98,6 +102,7 @@ public class PizzaBruteForceSolver {
         if (width * height > maxSliceSize || start.getCol() + width > colls || start.getRow() + height > rows) {
             return false;
         }
+
         for (int i = start.getCol(); i < start.getCol() + width; i++) {
             for (int j = start.getRow(); j < start.getRow() + height; j++) {
                 if (!solution.isAvailableCell(cellsArr[j][i].getIndex())) {
@@ -144,7 +149,7 @@ public class PizzaBruteForceSolver {
         colls = pizza.getColls();
         minIngredians = pizza.getMinIngredians();
         maxSliceSize = pizza.getMaxSliceSize();
-        smallPeaceEnough = maxSliceSize*maxSliceSize*4;
+        smallPeaceEnough = maxSliceSize * maxSliceSize * 4;
 
         Map<Boolean, List<Cell>> groupedIngredients = cellsSet.stream().collect(Collectors.groupingBy(Cell::isTomato));
         Iterator<List<Cell>> iterator = groupedIngredients.values().iterator();

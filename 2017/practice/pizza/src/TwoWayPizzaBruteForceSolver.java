@@ -6,7 +6,7 @@ import model.Solution;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class TwoWayPizzaBruteForceSolver {
+public class TwoWayPizzaBruteForceSolver implements PizzaSolver {
 
     private int minIngredians = 0;
     private int maxSliceSize = 0;
@@ -30,6 +30,7 @@ public class TwoWayPizzaBruteForceSolver {
         return Integer.compare(s2.slicesArea(), s1.slicesArea());
     });
 
+    @Override
     public Solution getSolution(Pizza pizza) {
         init(pizza);
 

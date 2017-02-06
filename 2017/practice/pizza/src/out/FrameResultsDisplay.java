@@ -1,6 +1,9 @@
 package out;
 
 import model.Cell;
+import model.Pizza;
+import model.Slice;
+import model.Solution;
 
 import javax.swing.*;
 import java.awt.*;

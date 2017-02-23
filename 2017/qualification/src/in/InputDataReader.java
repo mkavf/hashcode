@@ -10,10 +10,10 @@ import java.io.FileReader;
 
 public class InputDataReader {
 
-    public InputData readData(String fileName){
+    public InputData readData(){
         InputData inputData = new InputData();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("file.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("me_at_the_zoo.in"))) {
 
             String line = br.readLine();
             String[] inputParams = line.split(" ");
@@ -42,10 +42,15 @@ public class InputDataReader {
                     String[] latency = line.split(" ");
                     endpoint.getCacheLatency()[Integer.valueOf(latency[0])] = Integer.valueOf(latency[1]);
                 }
+
+                inputData.getEndpoints().add(endpoint);
             }
 
+            line = br.readLine();
 
             while (line != null) {
+                String[] requests = line.split(" ");
+                inputData.getEndpoints().get(Integer.valueOf(requests[1])).getRequestsToVideo()[Integer.valueOf(requests[0])] = Integer.valueOf(requests[2]);
                 line = br.readLine();
             }
         } catch (Exception e) {

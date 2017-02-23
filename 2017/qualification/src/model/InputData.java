@@ -1,6 +1,7 @@
 package model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InputData {
@@ -11,9 +12,11 @@ public class InputData {
     private int cacheSize;
 
 
-    private List<Video> videos;
+    private List<Video> videos = new ArrayList<>();
 
-    private List<Cache> caches;
+    private List<Cache> caches = new ArrayList<>();
+
+    private List<Endpoint> endpoints = new ArrayList<>();
 
     public int getVideoNumber() {
         return videoNumber;
@@ -69,5 +72,13 @@ public class InputData {
 
     public void setCaches(List<Cache> caches) {
         this.caches = caches;
+    }
+
+    public List<Endpoint> getEndpoints() {
+        return endpoints;
+    }
+
+    public void setEndpoints(List<Endpoint> endpoints) {
+        this.endpoints = endpoints;
     }
 }

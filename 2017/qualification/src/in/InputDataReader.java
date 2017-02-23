@@ -11,10 +11,10 @@ import java.io.FileReader;
 
 public class InputDataReader {
 
-    public InputData readData(){
+    public InputData readData(String filePath){
         InputData inputData = new InputData();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("/home/likewise-open/PERFECTIAL1/phamernyk/Develop/hashcode2017/2017/qualification/me_at_the_zoo.in"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
             String line = br.readLine();
             String[] inputParams = line.split(" ");

@@ -1,17 +1,16 @@
 package solution;
 
 
-import model.Cache;
-import model.Endpoint;
-import model.Pair;
-import model.Solution;
+import model.*;
 
 import java.util.List;
 import java.util.TreeSet;
 
 public class ProblemSolver {
 
-    public Solution getSolution(List<Endpoint> endpoints) {
+    public Solution getSolution(InputData inputData) {
+
+        List<Endpoint> endpoints = inputData.getEndpoints();
 
         TreeSet<Pair> crossJoin = new TreeSet<>();
         Cache[] result = new Cache[0];
@@ -30,7 +29,7 @@ public class ProblemSolver {
         }
 
         for(Pair p : crossJoin){
-            result[p.cache].addVideo(p.video);
+            result[p.cache].addVideo(inputData.getVideos().get(p.video));
         }
 
         return new Solution(result);

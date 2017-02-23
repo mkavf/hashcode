@@ -1,6 +1,7 @@
 package in;
 
 
+import model.Cache;
 import model.Endpoint;
 import model.InputData;
 import model.Video;
@@ -13,7 +14,7 @@ public class InputDataReader {
     public InputData readData(){
         InputData inputData = new InputData();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("me_at_the_zoo.in"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("/home/likewise-open/PERFECTIAL1/phamernyk/Develop/hashcode2017/2017/qualification/me_at_the_zoo.in"))) {
 
             String line = br.readLine();
             String[] inputParams = line.split(" ");
@@ -22,6 +23,10 @@ public class InputDataReader {
             inputData.setRequestNumber(Integer.valueOf(inputParams[2]));
             inputData.setCacheNumber(Integer.valueOf(inputParams[3]));
             inputData.setCacheSize(Integer.valueOf(inputParams[4]));
+
+            for (int i = 0; i < inputData.getCacheNumber(); i++) {
+                inputData.getCaches().add(new Cache(i, inputData.getCacheSize()));
+            }
 
             line = br.readLine();
             String[] videoSizes = line.split(" ");

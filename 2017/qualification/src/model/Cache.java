@@ -5,9 +5,22 @@ import java.util.List;
 
 public class Cache {
 
-    private int index;
+    public Cache(int index, int currentSize) {
+        this.index = index;
+        this.currentSize = currentSize;
+    }
 
+    private int index;
+    private int currentSize;
     private List<Video> videos = new ArrayList<>();
+
+    public boolean addVideo(Video video) {
+        if (currentSize - video.getSize() < 0) {
+            currentSize -= video.getSize();
+            return videos.add(video);
+        }
+        return false;
+    }
 
     public int getIndex() {
         return index;

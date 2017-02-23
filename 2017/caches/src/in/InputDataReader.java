@@ -8,6 +8,7 @@ import model.Video;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Comparator;
 
 public class InputDataReader {
 
@@ -34,6 +35,8 @@ public class InputDataReader {
             for (String videoSize : videoSizes) {
                 inputData.getVideos().add(new Video(Integer.valueOf(videoSize), index++));
             }
+
+            inputData.setMinVideoSize(inputData.getVideos().stream().min(Comparator.comparing(Video::getSize)).get().getSize());
 
             for (int i = 0; i < inputData.getEndpointNumber(); i++) {
                 line = br.readLine();

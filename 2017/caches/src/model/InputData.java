@@ -10,6 +10,7 @@ public class InputData {
     private int requestNumber;
     private int cacheNumber;
     private int cacheSize;
+    private int minVideoSize;
 
 
     private List<Video> videos = new ArrayList<>();
@@ -80,5 +81,13 @@ public class InputData {
 
     public void setEndpoints(List<Endpoint> endpoints) {
         this.endpoints = endpoints;
+    }
+
+    public int getMinVideoSize() {
+        return minVideoSize;
+    }
+
+    public void setMinVideoSize(int minVideoSize) {
+        this.minVideoSize = minVideoSize;
     }
 }

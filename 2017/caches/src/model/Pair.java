@@ -6,16 +6,16 @@ public class Pair implements Comparable<Pair>{
     public final int cache;
     public final int video;
 
-    public final double value;
+    public final int value;
 
-    public Pair(int endpoint, int cache, int video, double value) {
+    public Pair(int endpoint, int cache, int video, int value) {
         this.endpoint = endpoint;
         this.cache = cache;
         this.video = video;
         this.value = value;
     }
 
-    @Override
+   /* @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -33,10 +33,10 @@ public class Pair implements Comparable<Pair>{
         result = 31 * result + cache;
         result = 31 * result + video;
         return result;
-    }
+    }*/
 
     @Override
     public int compareTo(Pair o) {
-        return Double.compare(o.value, this.value);
+        return Integer.compare(o.value, this.value);
     }
 }

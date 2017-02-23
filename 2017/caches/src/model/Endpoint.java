@@ -11,6 +11,7 @@ public class Endpoint {
     public Endpoint(int videoCount, int cacheCount) {
         requestsToVideo = new int[videoCount];
         cacheLatency = new int[cacheCount];
+//        Arrays.fill(cacheLatency, Integer.MAX_VALUE);
     }
 
     public int[] getRequestsToVideo() {

@@ -49,6 +49,7 @@ public class InputDataReader {
                     line = br.readLine();
                     String[] latency = line.split(" ");
                     endpoint.getCacheLatency()[Integer.valueOf(latency[0])] = Integer.valueOf(latency[1]);
+                    inputData.getCaches().get(Integer.valueOf(latency[0])).addEndpoint(i);
                 }
 
                 inputData.getEndpoints().add(endpoint);

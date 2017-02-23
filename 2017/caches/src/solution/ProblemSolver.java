@@ -6,17 +6,12 @@ import model.InputData;
 import model.Pair;
 import model.Solution;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Set;
 
 public class ProblemSolver {
 
     public Solution getSolution(InputData inputData) {
-        Set<Integer> usedVides = new HashSet<>();
-
-
         List<Endpoint> endpoints = inputData.getEndpoints();
 
         PriorityQueue<Pair> crossJoin = new PriorityQueue<>();
@@ -28,14 +23,13 @@ public class ProblemSolver {
                 int videoRequests = endpointInstance.getRequestsToVideo()[video];
                 for (int cache = 0; cache < endpointInstance.getCacheLatency().length; cache++) {
                     int cacheLatency = endpointInstance.getCacheLatency()[cache];
-                    if (cacheLatency == 0 || videoRequests == 0 || usedVides.contains(video)){
+                    if (cacheLatency == 0 || videoRequests == 0){
                         continue;
                     }
                     int value = (endpointInstance.getDataCenterLatency() - cacheLatency) * videoRequests;
 
                     Pair p = new Pair(endpoint, cache, video, value);
                     crossJoin.add(p);
-                    usedVides.add(video);
                 }
             }
         }

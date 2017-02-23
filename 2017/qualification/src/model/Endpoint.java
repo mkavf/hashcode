@@ -6,6 +6,11 @@ public class Endpoint {
     private int[] cacheLatency;
     private int dataCenterLatency;
 
+    public Endpoint(int videoCount, int cacheCount) {
+        requestsToVideo = new int[videoCount];
+        cacheLatency = new int[cacheCount];
+    }
+
     public int[] getRequestsToVideo() {
         return requestsToVideo;
     }

@@ -37,8 +37,4 @@ public class Cache {
     public void setVideos(List<Video> videos) {
         this.videos = videos;
     }
-
-    public int getSize() {
-        return GLOBAL.CACHE_SIZE - videos.stream().mapToInt(Video::getSize).sum();
-    }
 }

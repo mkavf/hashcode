@@ -1,6 +1,11 @@
 package model;
 
 public class Video {
+    public Video(int size, int index) {
+        this.size = size;
+        this.index = index;
+    }
+
     private int size;
     private int index;
 

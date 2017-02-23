@@ -6,9 +6,9 @@ public class Pair implements Comparable<Pair>{
     public final int cache;
     public final int video;
 
-    public final int value;
+    public final double value;
 
-    public Pair(int endpoint, int cache, int video, int value) {
+    public Pair(int endpoint, int cache, int video, double value) {
         this.endpoint = endpoint;
         this.cache = cache;
         this.video = video;
@@ -37,6 +37,6 @@ public class Pair implements Comparable<Pair>{
 
     @Override
     public int compareTo(Pair o) {
-        return Integer.compare(o.value, this.value);
+        return Double.compare(o.value, this.value);
     }
 }

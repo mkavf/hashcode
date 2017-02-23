@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public class Endpoint {
 
     private int[] requestsToVideo;
@@ -17,6 +19,7 @@ public class Endpoint {
 
     public void setRequestsToVideo(int[] requestsToVideo) {
         this.requestsToVideo = requestsToVideo;
+        Arrays.sort(this.requestsToVideo);
     }
 
     public int[] getCacheLatency() {

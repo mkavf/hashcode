@@ -1,6 +1,7 @@
 package model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Cache {
@@ -34,4 +35,7 @@ public class Cache {
         return videos;
     }
 
+    public List<Integer> getLinkedEndpoints() {
+        return null;
+    }
 }

@@ -1,6 +1,7 @@
 package com.perfectial;
 
 import com.perfectial.reader.InputReader;
+import com.perfectial.writer.OutputWriter;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -47,21 +48,6 @@ public class Main {
             }
         }
 
-        String text = "";
-
-        for (Vehicle v: vehicles) {
-
-            text +=  v.rides.size();
-
-            if (vehicles.size() != 0) {
-
-                text += " " + v.rides.stream().map(r -> String.valueOf(r.id)).collect(joining(" "));
-            }
-
-            text += "\n";
-
-        }
-
-        Files.write(Paths.get(outputFile), text.getBytes());
+        OutputWriter.write(outputFile, vehicles);
     }
 }

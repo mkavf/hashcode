@@ -12,6 +12,7 @@ public class Ride{
     public int endY;
 
     public int startRide;
+    public int nextRides = 0;
 
     public Ride(int id, int startX, int startY, int endX, int endY, int startTime, int endTime) {
         this.id = id;
@@ -29,5 +30,10 @@ public class Ride{
 
     public int distance(){
         return Math.abs(startX - endX) + Math.abs(startY - endY);
+    }
+
+
+    public void increaseNearbyRides() {
+        nextRides++;
     }
 }

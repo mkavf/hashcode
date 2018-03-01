@@ -16,7 +16,7 @@ import static java.util.stream.Collectors.toList;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        String inputFile = "b_should_be_easy.in";
+        String inputFile = "c_no_hurry.in";
         String outputFile = inputFile + ".out";
 
 

@@ -1,6 +1,6 @@
 package com.perfectial;
 
-public class Ride {
+public class Ride{
     public int startTime;
     public int endTime;
 

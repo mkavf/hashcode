@@ -14,4 +14,14 @@ public class Vehicle {
 
         return last.isFinished(t);
     }
+
+    public int distance(Ride ride){
+        if(rides.isEmpty()){
+            return Math.abs(0 - ride.startX) + Math.abs(0 - ride.startY);
+        }
+
+        Ride last = rides.getLast();
+
+        return Math.abs(last.endX - ride.startX) + Math.abs(last.endY - ride.startY);
+    }
 }

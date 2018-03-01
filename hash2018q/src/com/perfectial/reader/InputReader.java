@@ -37,7 +37,7 @@ public class InputReader {
 
             for (int i = 1; i < data.size(); i++) {
                 String[] rideData = data.get(i).split(" ");
-                result.rides.add(new Ride(Integer.parseInt(rideData[0]),
+                result.rides.add(new Ride(i -1, Integer.parseInt(rideData[0]),
                         Integer.parseInt(rideData[1]),
                         Integer.parseInt(rideData[2]),
                         Integer.parseInt(rideData[3]),

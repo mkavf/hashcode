@@ -1,6 +1,8 @@
 package com.perfectial;
 
 public class Ride{
+
+    public int id;
     public int startTime;
     public int endTime;
 
@@ -11,7 +13,8 @@ public class Ride{
 
     public int startRide;
 
-    public Ride(int startX, int startY, int endX, int endY, int startTime, int endTime) {
+    public Ride(int id, int startX, int startY, int endX, int endY, int startTime, int endTime) {
+        this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.startX = startX;

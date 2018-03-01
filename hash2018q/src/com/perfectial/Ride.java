@@ -9,6 +9,7 @@ public class Ride {
     public int endX;
     public int endY;
 
+    public int startRide;
 
     public Ride(int startX, int startY, int endX, int endY, int startTime, int endTime) {
         this.startTime = startTime;
@@ -17,5 +18,13 @@ public class Ride {
         this.startY = startY;
         this.endX = endX;
         this.endY = endY;
+    }
+
+    public boolean isFinished(int t){
+        return t > startRide + distance();
+    }
+
+    public int distance(){
+        return Math.abs(startX - endX) + Math.abs(startY - endY);
     }
 }
